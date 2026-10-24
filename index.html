@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Peluş Yakala</title>
-<meta name="description" content="Sınıf için dijital pençe makinesi oyunu: soru çöz, hak kazan, peluşu yakala, ödülü al.">
+<title>Claw Catch</title>
+<meta name="description" content="A digital claw machine game for the classroom: answer questions, earn plays, grab a plush, win a prize.">
 <meta name="theme-color" content="#241a3a">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@ button{font-family:inherit;cursor:pointer;border:0}
 
 /* top bar */
 .top{display:flex;align-items:center;gap:8px;flex:0 0 auto}
-.icon-btn{background:var(--bg2);color:#fff;border:2px solid #4b3a70;border-radius:14px;height:42px;min-width:42px;padding:0 12px;font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.icon-btn{white-space:nowrap;background:var(--bg2);color:#fff;border:2px solid #4b3a70;border-radius:14px;height:42px;min-width:42px;padding:0 12px;font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
 .icon-btn:active{transform:translateY(1px)}
 .spacer{flex:1}
 .pill{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:999px;height:42px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:18px;white-space:nowrap}
@@ -77,7 +77,7 @@ canvas#game{display:block;touch-action:none}
 .drop:active,.drop.on{transform:translateY(5px);box-shadow:0 2px 0 var(--ink), inset 0 -3px 0 rgba(0,0,0,.18)}
 .drop:disabled{filter:grayscale(.7) brightness(.9)}
 .hint{text-align:center;color:var(--muted);font-size:14px;line-height:1.2;margin-top:-2px}
-.hint kbd{background:var(--bg2);border:1px solid #57468a;border-radius:6px;padding:0 6px;font-family:inherit;color:#fff}
+.hint kbd{white-space:nowrap;background:var(--bg2);border:1px solid #57468a;border-radius:6px;padding:0 6px;font-family:inherit;color:#fff}
 
 .shelf{background:var(--bg2);border:2px solid #4b3a70;border-radius:16px;padding:6px 10px;display:flex;align-items:center;gap:8px;min-height:46px;overflow-x:auto;scrollbar-width:none}
 .shelf::-webkit-scrollbar{display:none}
@@ -141,24 +141,24 @@ canvas#game{display:block;touch-action:none}
 <body>
 <div class="app" id="app">
   <header class="top">
-    <button class="icon-btn" id="btnSettings" aria-label="Ayarlar">⚙️</button>
-    <button class="icon-btn" id="btnQuestion">❓ Soru</button>
+    <button class="icon-btn" id="btnSettings" aria-label="Settings">⚙️</button>
+    <button class="icon-btn" id="btnQuestion">❓ Question</button>
     <div class="spacer"></div>
-    <div class="pill" id="pillCredit"><small>Hak</small><span id="creditVal">∞</span><button class="plus" id="btnPlus" aria-label="Bir hak ekle">+</button></div>
-    <div class="pill" id="pillTime"><small>Süre</small><span id="timeVal">20</span></div>
+    <div class="pill" id="pillCredit"><small>Plays</small><span id="creditVal">∞</span><button class="plus" id="btnPlus" aria-label="Add one play">+</button></div>
+    <div class="pill" id="pillTime"><small>Time</small><span id="timeVal">20</span></div>
   </header>
 
   <main class="stage">
     <div class="machine-wrap" id="wrap">
-      <canvas id="game" aria-label="Pençe makinesi"></canvas>
+      <canvas id="game" aria-label="Claw machine"></canvas>
       <div class="toast" id="toast"></div>
       <div class="nocredit" id="noCredit">
         <div class="card">
-          <h3>Hak bitti! 🪙</h3>
-          <p>Bir soruyu doğru cevapla ya da öğretmeninden hak iste.</p>
+          <h3>Out of plays! 🪙</h3>
+          <p>Answer a question correctly or ask your teacher for a play.</p>
           <div class="row">
-            <button class="btn pink" id="ncQuestion">❓ Soru çöz</button>
-            <button class="btn" id="ncPlus">+1 Hak</button>
+            <button class="btn pink" id="ncQuestion">❓ Answer a question</button>
+            <button class="btn" id="ncPlus">+1 Play</button>
           </div>
         </div>
       </div>
@@ -167,13 +167,13 @@ canvas#game{display:block;touch-action:none}
     <div class="side">
       <div class="controls">
         <div class="dpad">
-          <button class="arrow" id="btnLeft" aria-label="Sola">◀</button>
+          <button class="arrow" id="btnLeft" aria-label="Left">◀</button>
           <div class="joy" aria-hidden="true"><div class="base"></div><div class="stick" id="stick"><div class="ball"></div></div></div>
-          <button class="arrow" id="btnRight" aria-label="Sağa">▶</button>
+          <button class="arrow" id="btnRight" aria-label="Right">▶</button>
         </div>
-        <button class="drop" id="btnDrop">BIRAK</button>
+        <button class="drop" id="btnDrop">DROP</button>
       </div>
-      <div class="hint" id="hint">◀ ▶ ile pençeyi kaydır, <b>BIRAK</b>'a bas. Klavye: <kbd>←</kbd> <kbd>→</kbd> <kbd>Boşluk</kbd></div>
+      <div class="hint" id="hint">Move the claw with ◀ ▶, then hit <b>DROP</b>. Keyboard: <kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd></div>
       <div class="shelf" id="shelf"></div>
     </div>
   </main>
@@ -182,43 +182,43 @@ canvas#game{display:block;touch-action:none}
 <!-- settings -->
 <div class="modal" id="mSettings">
   <div class="sheet">
-    <h2>⚙️ Ayarlar</h2>
-    <label>Oyun modu</label>
+    <h2>⚙️ Settings</h2>
+    <label>Game mode</label>
     <div class="seg" id="segMode">
-      <button data-v="free">Serbest (sınırsız)</button>
-      <button data-v="class">Sınıf modu (hak ile)</button>
+      <button data-v="free">Free play (unlimited)</button>
+      <button data-v="class">Classroom (earn plays)</button>
     </div>
-    <p class="help">Sınıf modunda her oyun 1 hak harcar. Hakkı sen verirsin ya da öğrenci soruyu doğru cevaplayınca kazanır.</p>
+    <p class="help">In classroom mode every turn costs 1 play. You hand out plays, or students earn them by answering a question correctly.</p>
 
-    <label>Zorluk</label>
+    <label>Difficulty</label>
     <div class="seg" id="segDiff">
-      <button data-v="easy">Kolay</button>
+      <button data-v="easy">Easy</button>
       <button data-v="normal">Normal</button>
-      <button data-v="hard">Zor</button>
+      <button data-v="hard">Hard</button>
     </div>
 
-    <label>Tur süresi</label>
+    <label>Turn time</label>
     <div class="seg" id="segTime">
-      <button data-v="15">15 sn</button>
-      <button data-v="20">20 sn</button>
-      <button data-v="30">30 sn</button>
-      <button data-v="60">60 sn</button>
+      <button data-v="15">15 s</button>
+      <button data-v="20">20 s</button>
+      <button data-v="30">30 s</button>
+      <button data-v="60">60 s</button>
     </div>
 
-    <label class="check"><input type="checkbox" id="chkSound"> Ses efektleri</label>
+    <label class="check"><input type="checkbox" id="chkSound"> Sound effects</label>
 
-    <label for="taQuestions">Sorular</label>
-    <p class="help">Her satıra bir soru. Cevap eklemek için: <b>Soru | Cevap</b></p>
+    <label for="taQuestions">Questions</label>
+    <p class="help">One question per line. To add an answer: <b>Question | Answer</b></p>
     <textarea id="taQuestions" spellcheck="false"></textarea>
 
-    <label>Ödüller</label>
-    <p class="help">Hangi peluş hangi ödülü versin? Boş bırakırsan sadece "Tebrikler!" der. 🦄 Unicorn makinede tek ve en zor yakalanandır.</p>
+    <label>Prizes</label>
+    <p class="help">Which plush gives which prize? Leave it blank to just show "Congratulations!". 🦄 There is only one Unicorn in the machine and it is the hardest to catch.</p>
     <div class="rewards" id="rewardList"></div>
 
     <div class="actions">
-      <button class="btn ghost" id="btnRefill">🧸 Makineyi doldur</button>
-      <button class="btn ghost" id="btnResetShelf">Kazanılanları sıfırla</button>
-      <button class="btn green" id="btnSaveSettings">Kaydet</button>
+      <button class="btn ghost" id="btnRefill">🧸 Refill machine</button>
+      <button class="btn ghost" id="btnResetShelf">Clear won prizes</button>
+      <button class="btn green" id="btnSaveSettings">Save</button>
     </div>
   </div>
 </div>
@@ -226,15 +226,15 @@ canvas#game{display:block;touch-action:none}
 <!-- question -->
 <div class="modal" id="mQuestion">
   <div class="sheet q-sheet">
-    <span class="qtag">SORU</span>
+    <span class="qtag">QUESTION</span>
     <div class="qtext" id="qText"></div>
     <div class="ans" id="qAns"></div>
     <div class="row">
-      <button class="btn ghost" id="qShow">👀 Cevabı göster</button>
-      <button class="btn green" id="qRight">✓ Doğru <span id="qRightPlus">+1 hak</span></button>
-      <button class="btn red" id="qWrong">✗ Yanlış</button>
+      <button class="btn ghost" id="qShow">👀 Show answer</button>
+      <button class="btn green" id="qRight">✓ Correct <span id="qRightPlus">+1 play</span></button>
+      <button class="btn red" id="qWrong">✗ Wrong</button>
     </div>
-    <div class="row" style="margin-top:10px"><button class="btn ghost" id="qNext" style="font-size:15px;padding:4px 12px">Başka soru ↻</button></div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="qNext" style="font-size:15px;padding:4px 12px">Another question ↻</button></div>
   </div>
 </div>
 
@@ -242,9 +242,9 @@ canvas#game{display:block;touch-action:none}
 <div class="modal" id="mWin">
   <div class="sheet win-sheet" id="winSheet">
     <div class="big" id="winEmoji">🐻</div>
-    <h2 id="winTitle">Ayı yakaladın!</h2>
-    <div class="ticket" id="winTicket"><small>Ödülün</small><span id="winReward"></span></div>
-    <button class="btn pink" id="winOk" style="font-size:22px;padding:10px 26px">Ödülü al 🎉</button>
+    <h2 id="winTitle">You caught the Bear!</h2>
+    <div class="ticket" id="winTicket"><small>Your prize</small><span id="winReward"></span></div>
+    <button class="btn pink" id="winOk" style="font-size:22px;padding:10px 26px">Claim prize 🎉</button>
   </div>
 </div>
 
@@ -256,42 +256,42 @@ canvas#game{display:block;touch-action:none}
 
 /* ---------- data ---------- */
 const ANIMALS = [
-  {e:'🐻',n:'Ayı',     rw:'5 dakika serbest zaman'},
-  {e:'🐼',n:'Panda',   rw:'Sınıf müziğini seçme hakkı'},
-  {e:'🐷',n:'Domuz',   rw:'Bir çıkartma'},
-  {e:'🐰',n:'Tavşan',  rw:'Teneffüse ilk çıkma'},
-  {e:'🐘',n:'Fil',     rw:'Ödev jokeri 🎟️'},
-  {e:'🐸',n:'Kurbağa', rw:'Tahtaya resim çizme'},
-  {e:'🦁',n:'Aslan',   rw:'Bugünün sınıf lideri'},
-  {e:'🐯',n:'Kaplan',  rw:'Öğretmen sandalyesinde oturma'},
-  {e:'🐵',n:'Maymun',  rw:'Sıra arkadaşını seçme'},
-  {e:'🐶',n:'Köpek',   rw:'Bir soru jokeri'},
-  {e:'🐱',n:'Kedi',    rw:'Sınıfa bilmece sorma'},
-  {e:'🐨',n:'Koala',   rw:'Bir çıkartma'},
-  {e:'🦊',n:'Tilki',   rw:'Bir çıkartma'},
-  {e:'🐧',n:'Penguen', rw:'Sınıf oyununu sen seç'},
-  {e:'🐮',n:'İnek',    rw:'Bir çıkartma'},
-  {e:'🐥',n:'Civciv',  rw:'Bir çıkartma'},
-  {e:'🐙',n:'Ahtapot', rw:'Kitap köşesinde 10 dakika'},
-  {e:'🦄',n:'Unicorn', rw:'SÜPER ÖDÜL ✨ Sınıfça 10 dk oyun!', rare:true},
+  {e:'🐻',n:'Bear',     rw:'5 minutes of free time'},
+  {e:'🐼',n:'Panda',    rw:'Class DJ for the day'},
+  {e:'🐷',n:'Pig',      rw:'A sticker'},
+  {e:'🐰',n:'Bunny',    rw:'First in line for recess'},
+  {e:'🐘',n:'Elephant', rw:'Homework pass 🎟️'},
+  {e:'🐸',n:'Frog',     rw:'Draw on the board'},
+  {e:'🦁',n:'Lion',     rw:'Line leader for the day'},
+  {e:'🐯',n:'Tiger',    rw:'Sit in the teacher\'s chair'},
+  {e:'🐵',n:'Monkey',   rw:'Pick your seat buddy'},
+  {e:'🐶',n:'Puppy',    rw:'Skip one question'},
+  {e:'🐱',n:'Kitty',    rw:'Tell the class a riddle'},
+  {e:'🐨',n:'Koala',    rw:'A sticker'},
+  {e:'🦊',n:'Fox',      rw:'A sticker'},
+  {e:'🐧',n:'Penguin',  rw:'Choose the class game'},
+  {e:'🐮',n:'Cow',      rw:'A sticker'},
+  {e:'🐥',n:'Chick',    rw:'A sticker'},
+  {e:'🐙',n:'Octopus',  rw:'10 minutes in the reading corner'},
+  {e:'🦄',n:'Unicorn',  rw:'SUPER PRIZE ✨ 10 minutes of class game time!', rare:true},
 ];
 const DEFAULT_Q = [
-  '7 × 8 kaç eder? | 56',
-  'Türkiye\'nin başkenti neresidir? | Ankara',
-  'İngilizcede "elma" nasıl denir? | Apple',
-  'Bir haftada kaç gün vardır? | 7',
-  'Suyun kaynama sıcaklığı kaç derecedir? | 100 °C',
-  '15 + 27 kaç eder? | 42',
-  'Güneş sistemindeki en büyük gezegen hangisidir? | Jüpiter',
-  'Bir yılda kaç ay vardır? | 12',
-  '"Kitap" kelimesinin çoğulu nedir? | Kitaplar',
-  'Üçgenin kaç kenarı vardır? | 3',
+  'What is 7 × 8? | 56',
+  'What is the capital of France? | Paris',
+  'How many days are in a week? | 7',
+  'At what temperature does water boil? | 100 °C (212 °F)',
+  'What is 15 + 27? | 42',
+  'What is the largest planet in our solar system? | Jupiter',
+  'How many months are in a year? | 12',
+  'What is the plural of "mouse"? | Mice',
+  'How many sides does a triangle have? | 3',
+  'What do bees make? | Honey',
 ].join('\n');
 
 /* ---------- persistence ---------- */
 const store = {
-  get(k, d){ try{ const v = localStorage.getItem('pence_'+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } },
-  set(k, v){ try{ localStorage.setItem('pence_'+k, JSON.stringify(v)); }catch(e){} }
+  get(k, d){ try{ const v = localStorage.getItem('claw_'+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('claw_'+k, JSON.stringify(v)); }catch(e){} }
 };
 const settings = Object.assign({
   mode:'free', difficulty:'normal', time:20, sound:true, questions:DEFAULT_Q, rewards:{}
@@ -301,13 +301,23 @@ let collection = store.get('collection', {});
 const rewardFor = a => (settings.rewards[a.n] ?? a.rw);
 
 /* ---------- canvas setup ---------- */
-const W = 600, H = 680;
-const GX0 = 24, GX1 = 576, GY0 = 78, GY1 = 540;
-const RAIL_Y = 100, FLOOR = 528, BX = 172, BTOP = 300, DOOR_FLOOR = 660;
+const W = 600, GX0 = 24, GX1 = 576, GY0 = 78, RAIL_Y = 100, BX = 172;
 const HOME_X = 98, MIN_X = 66, MAX_X = GX1 - 42;
 const CABLE_MIN = 26, TIP = 44, PIVOT = 22;
-const CABLE_MAX = FLOOR - 4 - (RAIL_Y + 14) - PIVOT - TIP;
 const G = 1500;
+// vertical layout grows on tall (phone) screens so the machine fills the space
+let extra = 0, H, GY1, FLOOR, BTOP, DOOR_FLOOR, CABLE_MAX;
+function layout(){
+  H = 680 + extra; GY1 = 540 + extra; FLOOR = 528 + extra; BTOP = 300 + extra; DOOR_FLOOR = 660 + extra;
+  CABLE_MAX = FLOOR - 4 - (RAIL_Y + 14) - PIVOT - TIP;
+}
+function setExtra(e){
+  const d = e - extra;
+  if (!d) return;
+  extra = e; layout();
+  for (const p of plushes){ p.y += d; p.py += d; }
+}
+layout();
 
 const cv = document.getElementById('game');
 const ctx = cv.getContext('2d');
@@ -318,6 +328,7 @@ const spriteCache = new Map();
 function resize(){
   dpr = Math.min(window.devicePixelRatio || 1, 2.5);
   const r = wrap.getBoundingClientRect();
+  if (r.width > 0) setExtra(Math.max(0, Math.min(200, Math.round(W * r.height / r.width - 680))));
   scale = Math.max(0.2, Math.min(r.width / W, r.height / H));
   cv.style.width = Math.floor(W*scale) + 'px';
   cv.style.height = Math.floor(H*scale) + 'px';
@@ -410,6 +421,8 @@ function bounds(p){
   p.onFloor = false;
   if (p.x < GX0 + r) p.x = GX0 + r;
   if (p.x > GX1 - r) p.x = GX1 - r;
+  // plushes can only reach the prize chute after the claw has carried them
+  if (!p.chuteOK && p.x < BX + r + 5) p.x = BX + r + 5;
   const floor = p.x > BX ? FLOOR : DOOR_FLOOR;
   if (p.y > floor - r){ p.y = floor - r; p.onFloor = true; }
   // chute wall (capsule)
@@ -434,7 +447,7 @@ function headPos(){
   return {hx, top, pivot: top + PIVOT, tip: top + PIVOT + TIP};
 }
 const canPlay = () => settings.mode === 'free' || credits > 0;
-const DIFF = {easy:1.15, normal:0.82, hard:0.55};
+const DIFF = {easy:1.15, normal:0.74, hard:0.5};
 
 function tryDrop(){
   if (claw.state !== 'ready' || !canPlay() || anyModalOpen()) return;
@@ -511,7 +524,7 @@ function updateClaw(dt){
           p = Math.min(0.97, p);
           const ok = Math.random() < p;
           if (ok || align > 0.08){
-            claw.held = tg; tg.held = true; tg.rest = 0;
+            claw.held = tg; tg.held = true; tg.rest = 0; tg.chuteOK = true;
             if (!ok) claw.slipAt = CABLE_MIN + (claw.cable - CABLE_MIN) * (0.15 + Math.random()*0.6);
             sfx.grab();
           } else sfx.clunk();
@@ -523,12 +536,12 @@ function updateClaw(dt){
     case 'lifting': {
       claw.cable -= 210 * dt;
       if (claw.held && claw.slipAt != null && claw.cable <= claw.slipAt){
-        releaseHeld(); claw.open = 0.7; sfx.slip(); toast('Ahh, kaçtı! 😩');
+        releaseHeld(); claw.open = 0.7; sfx.slip(); toast('Oh no, it slipped! 😩');
       }
       if (claw.cable <= CABLE_MIN){
         claw.cable = CABLE_MIN;
         claw.state = 'carry';
-        if (!claw.held) toast('Boş geldi 🙈');
+        if (!claw.held) toast('Missed! 🙈');
       }
       break;
     }
@@ -600,9 +613,9 @@ function showNextWin(){
   store.set('collection', collection);
   renderShelf();
   document.getElementById('winEmoji').textContent = a.e;
-  document.getElementById('winTitle').textContent = a.rare ? 'SÜPER! Unicorn yakaladın!' : `${a.n} yakaladın!`;
+  document.getElementById('winTitle').textContent = a.rare ? 'SUPER! You caught the Unicorn!' : `You caught the ${a.n}!`;
   const rw = (rewardFor(a) || '').trim();
-  document.getElementById('winReward').textContent = rw || 'Tebrikler! 🎉';
+  document.getElementById('winReward').textContent = rw || 'Congratulations! 🎉';
   document.getElementById('winTicket').style.display = 'block';
   document.getElementById('winSheet').classList.toggle('rare', !!a.rare);
   openModal('mWin');
@@ -613,7 +626,7 @@ function showNextWin(){
 document.getElementById('winOk').onclick = () => {
   if (winShowing){ winShowing.claimed = true; plushes = plushes.filter(p => p !== winShowing); winShowing = null; }
   closeModal('mWin');
-  if (plushes.filter(p => !p.won).length < 8){ refill(10); toast('Makine dolduruluyor 🧸'); }
+  if (plushes.filter(p => !p.won).length < 8){ refill(10); toast('Refilling the machine 🧸'); }
   setTimeout(showNextWin, 300);
   updateHud();
 };
@@ -651,7 +664,7 @@ function draw(){
   c.fillStyle = '#ff6b9a';
   c.font = '800 22px "Baloo 2", system-ui, sans-serif';
   c.textAlign = 'center'; c.textBaseline = 'middle';
-  c.fillText('ÖDÜL', (GX0+BX)/2, BTOP - 70);
+  c.fillText('PRIZE', (GX0+BX)/2, BTOP - 70);
   const bob = Math.sin(time*5)*4;
   c.beginPath(); c.moveTo((GX0+BX)/2 - 12, BTOP - 48 + bob); c.lineTo((GX0+BX)/2 + 12, BTOP - 48 + bob); c.lineTo((GX0+BX)/2, BTOP - 32 + bob); c.closePath(); c.fill();
   // pile floor
@@ -659,7 +672,7 @@ function draw(){
   c.restore();
 
   // door interior (visible through the window)
-  c.fillStyle = '#30284a'; c.fillRect(30, GY1, BX - 30, H - GY1 - 8);
+  c.fillStyle = '#30284a'; c.fillRect(30, GY1, BX - 30, H - GY1 - 16);
 
   // rail
   rr(c, GX0 + 4, RAIL_Y - 6, GX1 - GX0 - 8, 12, 6);
@@ -686,7 +699,7 @@ function draw(){
   c.lineWidth = 5; c.strokeStyle = INK; c.stroke();
 
   // front panel with prize window
-  const DX = 38, DY = 574, DW = BX - 50, DH = 88;
+  const DX = 38, DY = GY1 + 34, DW = BX - 50, DH = 88;
   c.beginPath();
   c.roundRect(GX0 - 12, GY1 + 4, GX1 - GX0 + 24, H - GY1 - 14, [0,0,22,22]);
   c.roundRect(DX, DY, DW, DH, 12);
@@ -697,18 +710,18 @@ function draw(){
   // door flap
   c.fillStyle = 'rgba(30,20,60,.22)'; rr(c, DX + 4, DY + 4, DW - 8, 26, 8); c.fill();
   c.fillStyle = INK; c.font = '800 16px "Baloo 2", system-ui, sans-serif'; c.textAlign = 'center';
-  c.fillText('ÖDÜL KAPISI', DX + DW/2, GY1 + 21);
+  c.fillText('PRIZE DOOR', DX + DW/2, GY1 + 21);
 
   // right side decoration: coin slot + display
   rr(c, 210, GY1 + 26, 220, 70, 14); c.fillStyle = '#7ccdb3'; c.fill(); c.lineWidth = 3; c.stroke();
-  for (let i = 0; i < 5; i++) for (let j = 0; j < 2; j++){ c.beginPath(); c.arc(232 + i*16, GY1 + 49 + j*22, 4, 0, 7); c.fillStyle = INK; c.fill(); }
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 2; j++){ c.beginPath(); c.arc(232 + i*16, GY1 + 49 + j*22, 4, 0, 7); c.fillStyle = INK; c.fill(); }
   c.fillStyle = INK; c.font = '800 18px "Baloo 2", system-ui, sans-serif'; c.textAlign = 'left';
-  c.fillText('HER ÇEKİŞ', 322, GY1 + 52);
-  c.fillText('BİR ŞANS!', 322, GY1 + 74);
+  c.fillText('EVERY GRAB', 308, GY1 + 52);
+  c.fillText('IS A CHANCE!', 308, GY1 + 74);
   rr(c, 470, GY1 + 26, 72, 70, 14); c.fillStyle = '#ffd23f'; c.fill(); c.lineWidth = 3; c.stroke();
   rr(c, 502, GY1 + 38, 8, 34, 4); c.fillStyle = INK; c.fill();
   c.font = '800 13px "Baloo 2", system-ui, sans-serif'; c.textAlign = 'center';
-  c.fillText('JETON', 506, GY1 + 86);
+  c.fillText('TOKEN', 506, GY1 + 86);
 
   drawMarquee();
 }
@@ -795,8 +808,8 @@ function drawMarquee(){
   }
   c.font = '800 34px "Baloo 2", system-ui, sans-serif';
   c.textAlign = 'center'; c.textBaseline = 'middle';
-  c.lineWidth = 7; c.strokeStyle = INK; c.strokeText('PELUŞ YAKALA', W/2, 40);
-  c.fillStyle = '#fff'; c.fillText('PELUŞ YAKALA', W/2, 40);
+  c.lineWidth = 7; c.strokeStyle = INK; c.strokeText('CLAW CATCH', W/2, 40);
+  c.fillStyle = '#fff'; c.fillText('CLAW CATCH', W/2, 40);
 }
 
 /* ---------- confetti ---------- */
@@ -894,7 +907,7 @@ function updateHud(){
 }
 let lastTimeShown = null;
 function updateTimer(){
-  const v = claw.state === 'ready' ? Math.ceil(turnStarted ? timeLeft : settings.time) : 0;
+  const v = claw.state === 'ready' ? Math.ceil(turnStarted ? timeLeft : settings.time) : '–';
   if (v !== lastTimeShown){
     lastTimeShown = v;
     $('timeVal').textContent = v;
@@ -904,12 +917,12 @@ function updateTimer(){
 function renderShelf(){
   const s = $('shelf');
   const keys = Object.keys(collection);
-  s.innerHTML = '<span class="lbl">Kazanılanlar</span>' + (keys.length
+  s.innerHTML = '<span class="lbl">Won</span>' + (keys.length
     ? keys.map(k => `<span class="item">${k}${collection[k] > 1 ? `<b>${collection[k]}</b>` : ''}</span>`).join('')
-    : '<span class="empty">Henüz yok — ilk peluşu sen yakala!</span>');
+    : '<span class="empty">Nothing yet — be the first to catch one!</span>');
 }
 function addCredit(n=1){
-  credits += n; saveCredits(); sfx.good(); toast(`+${n} hak 🪙`); updateHud();
+  credits += n; saveCredits(); sfx.good(); toast(`+${n} play 🪙`); updateHud();
 }
 
 const modals = ['mSettings','mQuestion','mWin'];
@@ -969,7 +982,7 @@ function parseQuestions(){
 }
 function nextQuestion(){
   if (!deck.length){ deck = parseQuestions().sort(() => Math.random() - .5); }
-  currentQ = deck.pop() || {q:'Ayarlardan soru ekle ✏️', a:''};
+  currentQ = deck.pop() || {q:'Add questions in Settings ✏️', a:''};
   $('qText').textContent = currentQ.q;
   $('qAns').textContent = '';
   $('qShow').style.display = currentQ.a ? '' : 'none';
@@ -981,10 +994,10 @@ $('qNext').onclick = () => { nextQuestion(); sfx.click(); };
 $('qShow').onclick = () => { $('qAns').textContent = currentQ.a; };
 $('qRight').onclick = () => {
   closeModal('mQuestion');
-  if (settings.mode === 'class') addCredit(1); else { sfx.good(); toast('Doğru! 🎉'); }
+  if (settings.mode === 'class') addCredit(1); else { sfx.good(); toast('Correct! 🎉'); }
   confetti(60);
 };
-$('qWrong').onclick = () => { closeModal('mQuestion'); sfx.bad(); toast('Bir dahakine! 💪'); };
+$('qWrong').onclick = () => { closeModal('mQuestion'); sfx.bad(); toast('Next time! 💪'); };
 
 /* settings */
 let draft = null;
@@ -1001,7 +1014,7 @@ $('btnSettings').onclick = () => {
   $('chkSound').checked = !!draft.sound;
   $('taQuestions').value = draft.questions;
   $('rewardList').innerHTML = ANIMALS.map((a, i) =>
-    `<span class="em" title="${a.n}">${a.e}</span><input type="text" data-n="${a.n}" placeholder="${a.n} için ödül" value="${(rewardFor(a)||'').replace(/"/g,'&quot;')}">`).join('');
+    `<span class="em" title="${a.n}">${a.e}</span><input type="text" data-n="${a.n}" placeholder="Prize for ${a.n}" value="${(rewardFor(a)||'').replace(/"/g,'&quot;')}">`).join('');
   openModal('mSettings');
 };
 $('btnSaveSettings').onclick = () => {
@@ -1016,15 +1029,15 @@ $('btnSaveSettings').onclick = () => {
   if (modeChanged && settings.mode === 'class' && credits <= 0){ credits = 3; saveCredits(); }
   if (!turnStarted) timeLeft = settings.time;
   closeModal('mSettings');
-  toast('Kaydedildi ✓');
+  toast('Saved ✓');
 };
 $('btnRefill').onclick = () => {
   plushes = plushes.filter(p => p.won && !p.claimed);
   refill(18);
   for (let i = 0; i < 400; i++) physStep(1/120);
-  closeModal('mSettings'); toast('Makine dolu! 🧸');
+  closeModal('mSettings'); toast('Machine refilled! 🧸');
 };
-$('btnResetShelf').onclick = () => { collection = {}; store.set('collection', collection); renderShelf(); toast('Sıfırlandı'); };
+$('btnResetShelf').onclick = () => { collection = {}; store.set('collection', collection); renderShelf(); toast('Cleared'); };
 
 /* ---------- loop ---------- */
 let last = performance.now(), acc = 0;
@@ -1056,7 +1069,7 @@ new ResizeObserver(resize).observe(wrap);
 renderShelf();
 updateHud();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => spriteCache.clear());
-if (matchMedia('(pointer: coarse)').matches) $('hint').innerHTML = '◀ ▶ ile pençeyi kaydır, <b>BIRAK</b>\'a bas. Tam üstüne gelince yakalama şansı artar!';
+if (matchMedia('(pointer: coarse)').matches) $('hint').innerHTML = 'Move the claw with ◀ ▶, then hit <b>DROP</b>. Line it up right on top for the best chance!';
 requestAnimationFrame(frame);
 
 // expose for testing

@@ -1,12 +1,12 @@
-# Peluş Yakala 🧸
+# Claw Catch 🧸
 
-Sınıf için dijital pençe makinesi (claw machine) oyunu. Akıllı tahtada, bilgisayarda ve telefonda çalışır.
+A digital claw machine game for the classroom. Works on smartboards, laptops and phones.
 
-- **Serbest mod:** Sınırsız oyna.
-- **Sınıf modu:** Her oyun 1 hak harcar. Öğrenci soruyu doğru cevaplayınca ya da öğretmen verince hak kazanılır.
-- **Sorular ve ödüller** ⚙️ Ayarlar'dan düzenlenir, tarayıcıda saklanır.
-- 🦄 Unicorn makinede tek ve en zor yakalanandır: süper ödül.
+- **Free play:** unlimited turns.
+- **Classroom mode:** every turn costs 1 play. Students earn plays by answering a question correctly, or the teacher hands them out.
+- **Questions and prizes** are editable in ⚙️ Settings and saved in the browser.
+- 🦄 There is only one Unicorn in the machine and it is the hardest to catch: the super prize.
 
-Kontroller: ◀ ▶ butonları veya klavyede ← → ile pençeyi kaydır, **BIRAK** (Boşluk/Enter) ile pençeyi indir.
+Controls: move the claw with the ◀ ▶ buttons or the ← → keys, then press **DROP** (Space/Enter).
 
-Tek dosya (`index.html`), derleme gerektirmez. Render'da Static Site olarak yayınlanır (publish dizini: `.`).
+Single file (`index.html`), no build step. Deployed on Render as a Static Site (publish directory: `.`).
