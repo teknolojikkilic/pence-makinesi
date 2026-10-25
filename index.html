@@ -787,14 +787,12 @@ function draw(){
   for (const p of plushes) if (!p.held) drawPlush(p);
   drawClaw();
 
-  // chute rim (front half) and right pedestal: white discs like the video
+  // chute rim: white disc like the video
   c.lineWidth = 3; c.strokeStyle = OUT;
   c.beginPath(); c.ellipse(HOME_X, FLOOR - 4, 60, 17, 0, 0, Math.PI*2); c.lineWidth = 9; c.strokeStyle = '#ffffff'; c.stroke();
   c.lineWidth = 3; c.strokeStyle = OUT;
   c.beginPath(); c.ellipse(HOME_X, FLOOR - 4, 65, 22, 0, 0, Math.PI*2); c.stroke();
   c.beginPath(); c.ellipse(HOME_X, FLOOR - 4, 55, 12, 0, 0, Math.PI*2); c.stroke();
-  c.beginPath(); c.ellipse(522, FLOOR - 6, 58, 18, 0, 0, Math.PI*2); c.fillStyle = '#ffffff'; c.fill(); c.stroke();
-  c.beginPath(); c.ellipse(522, FLOOR + 2, 58, 18, 0, 0, Math.PI); c.stroke();
 
   // glare
   c.save(); rr(c, GX0, GY0, GX1-GX0, FLOOR+6-GY0, 8); c.clip();
